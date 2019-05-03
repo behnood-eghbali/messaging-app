@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Chat from './Chat';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './Contacts.css';
 
 export default class Contacts extends Component {
 
