@@ -1,4 +1,6 @@
 ## React Messaging App
+## Application Structure
+![alt text](https://github.com/behnood-eghbali/messaging-app/blob/master/Diagram.png)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
