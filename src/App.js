@@ -1,41 +1,35 @@
-import React, { Component } from 'react';
+import React, { useCallback, useState } from 'react';
 import AddContact from './AddContact';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
-export default class App extends Component {
+const App = () => {
+  const [newContactClicked, setNewContactClicked] = useState(false);
 
-  constructor(props) {
-    super(props);
-    this.state = {newContactClicked: false};
-    this.handleNewContact = this.handleNewContact.bind(this);
-  }
-
-  handleNewContact(event) {
+  const handleNewContact = useCallback(event => {
     event.preventDefault();
-    this.setState({newContactClicked: true});
-  }
+    setNewContactClicked(true);
+  }, []);
 
-  render() {
-    const newIsClicked = this.state.newContactClicked;
-    return (
-      <div className="App">
-        <header className="App-header">
-          <h2 className="App-title">React Messaging App</h2>
-        </header>
-        <div className="row">
-          <div className="col-md-2 col-lg-2"/>
-          <div className="col-md-8 col-lg-8">
-            <div className="jumbotron">
-              <button type="button" onClick={this.handleNewContact} style={{'display': newIsClicked ? 'none' : 'block'}} className="btn btn-primary">New Contact
-              </button>
-              {newIsClicked && <AddContact />}
-              <pre>{JSON.stringify(this.state, null, 2)}</pre>
-            </div>
+  return (
+    <div className="App">
+      <header className="App-header">
+        <h2 className="App-title">React Messaging App</h2>
+      </header>
+      <div className="row">
+        <div className="col-md-2 col-lg-2"/>
+        <div className="col-md-8 col-lg-8">
+          <div className="jumbotron">
+            <button type="button" onClick={handleNewContact} style={{'display': newContactClicked ? 'none' : 'block'}} className="btn btn-primary">New Contact
+            </button>
+            {newContactClicked && <AddContact />}
+            <pre>{JSON.stringify({ newContactClicked }, null, 2)}</pre>
           </div>
-          <div className="col-md-2 col-lg-2"/>
         </div>
+        <div className="col-md-2 col-lg-2"/>
       </div>
-    );
-  }
+    </div>
+  );
 }
+
+export default App;
