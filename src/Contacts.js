@@ -33,7 +33,7 @@ const Contacts = (props) => {
               </li>
             )}
         </ul>
-        <pre>{JSON.stringify(this.state, null, 2)}</pre>
+        <pre>{JSON.stringify(state, null, 2)}</pre>
       </div>
   );
 }
