@@ -1,13 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-export default class Messages extends Component {
-
-  render() {
+const Messages = (props) => {
     return(
       <div className="messages">
         <ul className="list-group">
-          {this.props.messages.map((message, i) =>
+          {props.messages.map((message, i) =>
             <li className="list-group-item" key={i}>
               {message}
             </li>
@@ -15,5 +13,5 @@ export default class Messages extends Component {
         </ul>
       </div>
     );
-  }
 }
+export default Messages;
