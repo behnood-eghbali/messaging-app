@@ -1,15 +1,20 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-const Messages = (props) => {
+const Messages = ({ messages }) => {
     return(
       <div className="messages">
         <ul className="list-group">
-          {props.messages.map((message, i) =>
-            <li className="list-group-item" key={i}>
-              {message}
-            </li>
-          )}
+          { 
+            messages.map((message, i) =>
+              <li
+                className="list-group-item"
+                key={i}
+              >
+                {message}
+              </li>
+            )
+          }
         </ul>
       </div>
     );
