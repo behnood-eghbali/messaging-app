@@ -9,7 +9,7 @@ const App = () => {
   const handleNewContact = useCallback(event => {
     event.preventDefault();
     setNewContactClicked(true);
-  }, []);
+  }, [setNewContactClicked]);
 
   return (
     <div className="App">

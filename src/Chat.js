@@ -1,37 +1,55 @@
-import React, { Component } from 'react';
+import React, { useState, useCallback } from 'react';
 import Messages from './Messages';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-export default class Chat extends Component {
+const Chat = () => {
+  const [message, setMessage] = useState('Type a message');
+  const [messages, setMessages] = useState([]);
+  const [sendClicked, setSendClicked] = useState(false);
 
-  constructor(props) {
-    super(props);
-    this.state = {message: 'Type a message', messages: [], sendClicked: false}
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
 
-  handleChange(event) {
-    this.setState({message: event.target.value});
-  }
+  const handleChange = useCallback((event) => {
+    setMessage(event.target.value);
+  }, [setMessage]);
 
-  handleSubmit(event) {
+  const handleSubmit = useCallback((event) => {
     event.preventDefault();
-    this.setState({message: '', messages: [...this.state.messages, this.state.message], sendClicked: true});
-  }
+    setMessages([...messages, message]);
+    setMessage('');
+    setSendClicked(!sendClicked);
+  }, [
+    message,
+    setMessage,
+    messages,
+    setMessages,
+    sendClicked,
+    setSendClicked
+  ]);
 
-  render() {
-    return (
-      <div className="jumbotron">
-        <Messages messages={this.state.messages} />
-        <nav className="navbar navbar-default">
-          <form>
-            <textarea type="text" className="form-control" value={this.state.message} onChange={this.handleChange} />
-            <button type="submit" value="Submit" onClick={this.handleSubmit} className="btn btn-primary send">Send</button>
-          </form>
-        </nav>
-        <pre>{JSON.stringify(this.state, null, 2)}</pre>
-      </div>
-    );
-  }
+  return (
+    <div className="jumbotron">
+      <Messages messages={messages} />
+      <nav className="navbar navbar-default">
+        <form>
+          <textarea
+            type="text"
+            className="form-control"
+            value={message}
+            onChange={handleChange}
+          />
+          <button
+            type="submit"
+            value="Submit"
+            onClick={handleSubmit}
+            className="btn btn-primary send"
+          >
+            Send
+          </button>
+        </form>
+      </nav>
+      <pre>{JSON.stringify({message, messages}, null, 2)}</pre>
+    </div>
+  );
 }
+
+export default Chat;
